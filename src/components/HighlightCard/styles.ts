@@ -70,4 +70,5 @@ export const LastTransition = styled.Text<TypeProps>`
   font-size: ${RFValue(12)}px;
 
   color: ${({ theme, type }) =>
-    type === "total" ? theme.colors.shape : theme.colors.text};`;
+    type === "total" ? theme.colors.shape : theme.colors.text};
+`;
