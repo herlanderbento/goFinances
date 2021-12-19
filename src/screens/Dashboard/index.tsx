@@ -1,5 +1,8 @@
 import React from "react";
+
 import { HighlightCard } from "../../components/HighlightCard";
+import { TransactionCard } from "../../components/TransactionCard";
+
 import {
   Container,
   Header,
@@ -11,16 +14,20 @@ import {
   UserWrapper,
   Icon,
   HighlightCards,
+  Transactions,
+  Title,
 } from "./styles";
 
-interface IAllDataCardsProps {
-  types: string;
-  title: string;
-  amount: string;
-  lastTransition: string;
-}
-
 export function Dashboard() {
+  const data = {
+    title: "Desenvolvimento de site",
+    amount: "R$ 12.000,00",
+    category: {
+      name: "Vendas",
+      icon: "dollar-sign",
+    },
+    date: "13/04/2020",
+  };
   return (
     <Container>
       <Header>
@@ -60,6 +67,11 @@ export function Dashboard() {
           lastTransition="01 à 16 de abril"
         />
       </HighlightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+        <TransactionCard data={data} />
+      </Transactions>
     </Container>
   );
 }
