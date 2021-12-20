@@ -6,6 +6,7 @@ import {
   getBottomSpace,
   getStatusBarHeight,
 } from "react-native-iphone-x-helper";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 import { DataListProps } from ".";
 
@@ -50,6 +51,9 @@ export const Photo = styled.Image`
 export const User = styled.View`
   margin-left: 7px;
 `;
+
+export const LogoutButton = styled(BorderlessButton)``;
+
 export const UserGreeting = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
 
