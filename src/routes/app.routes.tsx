@@ -8,6 +8,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
+import { Resumo } from "../screens/Resumo";
 
 export function AppRoutes() {
   const theme = useTheme();
@@ -49,7 +50,7 @@ export function AppRoutes() {
       />
       <Screen
         name="Resumo"
-        component={Dashboard}
+        component={Resumo}
         options={{
           tabBarIcon: ({ size, color }) => (
             <Feather name="pie-chart" size={size} color={color} />
