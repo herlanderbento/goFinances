@@ -65,7 +65,7 @@ export const Amount = styled.Text<TypeProps>`
 
 export const Footer = styled.View``;
 
-export const LastTransition = styled.Text<TypeProps>`
+export const LastTransaction = styled.Text<TypeProps>`
   font-family: ${({ theme }) => theme.fonts.regular}
   font-size: ${RFValue(12)}px;
 
