@@ -2,11 +2,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import { VictoryPie } from "victory-native";
+import { useTheme } from "styled-components";
 
 import { HistoryCard } from "../../components/HistoryCard";
-import theme from "../../global/styles/theme";
 import { categories } from "../../utils/categories";
-import { Container, Header, Title, Content, ChartContainer } from "./styles";
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  ChartContainer,
+  MonthSelect,
+  MonthSelectButton,
+  MonthSelectIcon,
+  Month,
+} from "./styles";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -28,6 +39,9 @@ export function Resumo() {
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>(
     []
   );
+
+  const theme = useTheme();
+
   async function loadData() {
     const dataKey = "@gofinances:transactions";
     const response = await AsyncStorage.getItem(dataKey);
@@ -88,23 +102,38 @@ export function Resumo() {
       <Header>
         <Title>Resumo por categoria</Title>
       </Header>
-      <ChartContainer>
-        <VictoryPie
-          colorScale={totalByCategories.map((category) => category.color)}
-          style={{
-            labels: {
-              fontSize: RFValue(18),
-              fontWeight: "bold",
-              fill: theme.colors.shape,
-            },
-          }}
-          labelRadius={50}
-          data={totalByCategories}
-          x="percent"
-          y="total"
-        />
-      </ChartContainer>
-      <Content>
+      <Content
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingBottom: useBottomTabBarHeight(),
+        }}
+      >
+        <MonthSelect>
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-left" />
+          </MonthSelectButton>
+          <Month>Julho</Month>
+          <MonthSelectButton>
+            <MonthSelectIcon name="chevron-right" />
+          </MonthSelectButton>
+        </MonthSelect>
+        <ChartContainer>
+          <VictoryPie
+            colorScale={totalByCategories.map((category) => category.color)}
+            style={{
+              labels: {
+                fontSize: RFValue(18),
+                fontWeight: "bold",
+                fill: theme.colors.shape,
+              },
+            }}
+            labelRadius={50}
+            data={totalByCategories}
+            x="percent"
+            y="total"
+          />
+        </ChartContainer>
         {totalByCategories.map(({ key, name, totalFormatted, color }) => (
           <HistoryCard
             key={key}
